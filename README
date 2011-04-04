@@ -1,0 +1,32 @@
+This is an example of hosting the standard VS editor inside of a modal dialog. It is intended only to show the concept, not do anything
+terribly interesting. It is intended as an example not a copy/paste source. If anything is not clear please ask questions here or on the
+MSDN forums (http://social.msdn.microsoft.com/Forums/en-US/vsx/threads) as there is enough cargo-cult programming in the world, no need 
+to add to it.
+
+To use:
+
+1:  Open ModalDialogHostedEditorExample\ModalDialogHostedEditor\ModalDialogHostedEditor.csproj.user and change the install location of VS in that
+file (in the StartProgram tag) to point to wherever you have VS installed, otherwise F5 on the project won't work.
+
+2:  Make sure you have the VS SDK installed or else VS won't recognize the project type and you will be missing necessary targets files.
+
+3:  Load the solution in VS, press F5 to start debugging, when the new instance of VS is launched go to View->Other Windows->Modal Dialog Launcher
+(or the Other Windows MenuController on the end of the standard toolbar), when the window is launched click on the 'Launch Modal Dialog' button
+to bring up the modal dialog with an editor in it.
+
+There are a few known 'issues' with the example, such as:
+
+1:  Intellisense doesn't work unless you have a solution open. This is expected as Intellisense for a language needs a reference set (dlls) and
+without any solution loaded (and project active) there simply is no reference set. I am sure you can do some work to manually hook up intellisense
+to the editor and feed it the reference set, but I didn't bother as this is just an example of how to get the editor up and running and working
+(specifically around command routing) inside a modal dialog. The rest is left as an excercise to the reader.
+
+2:  Some commands for C# (and possibly other languages) don't work right since there is no backing disk file. This seems like a bug (I will file
+one) but in short they try to ask the source control provider to ensure the 'backing file' is writeable before doing things like Comment Selection
+(Ctrl+K+C), in this case the backing file string is empty and they don't check that but rather pass it along to IVsQueryEditQuerySave, which returns
+a failure code indicating the paramter is invalid (i.e. the 'file path'). One work around would be to spin up a temporary backing file for the
+editor on disk and delete it when you close the modal dialog.
+
+Feel free to contact me here (or the forums) with bugs, but as I said this is an example and not terribly strenuously tested, so I am sure
+there are bugs, I may or may not fix them depending on how horrid they are (as I said this isn't intended to be used in your shipping
+product / extension as is).

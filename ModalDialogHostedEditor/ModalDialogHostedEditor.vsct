@@ -1,0 +1,25 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<CommandTable xmlns="http://schemas.microsoft.com/VisualStudio/2005-10-18/CommandTable" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <Extern href="stdidcmd.h"/>
+  <Extern href="vsshlids.h"/>
+  <Extern href="msobtnid.h"/>
+
+  <Commands package="guidModalDialogHostedEditorPkg">
+    <Buttons>
+      <Button guid="guidModalDialogHostedEditorCmdSet" id="cmdidModalDialogLauncher" priority="0x0100" type="Button">
+        <Parent guid="guidSHLMainMenu" id="IDG_VS_WNDO_OTRWNDWS1"/>
+        <Strings>
+          <CommandName>cmdidModalDialogLauncher</CommandName>
+          <ButtonText>Modal Dialog Launcher</ButtonText>
+        </Strings>
+      </Button>
+    </Buttons>
+  </Commands>
+
+  <Symbols>
+    <GuidSymbol name="guidModalDialogHostedEditorPkg" value="{5ad0640a-e11a-4bb2-ba9c-302cb700d5ab}" />
+    <GuidSymbol name="guidModalDialogHostedEditorCmdSet" value="{bc23a264-435f-4a7e-9373-21bdebc51ccf}">
+      <IDSymbol name="cmdidModalDialogLauncher" value="0x0101" />
+    </GuidSymbol>
+  </Symbols>
+</CommandTable>
